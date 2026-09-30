@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мирбек &amp; Мээрим — Үйлөнүү тоюбузга чакырабыз</title>
+<meta name="description" content="Мирбек менен Мээримдин үйлөнүү тою — 14-ноябрь, 2026-жыл. Ош шаары.">
+
+<meta property="og:title" content="Мирбек & Мээрим — Той чакыруу">
+<meta property="og:description" content="14.11.2026 · Ош шаары. Сизди тоюбузга чакырабыз!">
+<meta property="og:image" content="photo1.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Marck+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Мирбек & Мээрим — той чакыруу
+   Түстөрдү ушул жерден өзгөртсөңүз болот
+   ============================================================ */
+:root{
+  --green:#6E7553;
+  --green-dark:#5C6345;
+  --green-light:#7C8460;
+  --cream:#F4F0E6;
+  --cream-2:#EBE6D9;
+  --ink:#2F2F2A;
+  --ink-soft:#575349;
+  --line:rgba(47,47,42,.22);
+  --card-w:430px;
+  /* Кирилл тамгаларды колдогон каллиграфия шрифти */
+  --script:'Marck Script','Great Vibes',cursive;
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--serif);
+  background:#25271F;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;height:100vh}
+
+img{display:block;width:100%;height:auto}
+svg{fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- КОНВЕРТ ЭКРАН ---------- */
+.cover{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 35%,#7C8460 0%,#5C6345 55%,#3F452F 100%);
+  transition:opacity .9s ease,visibility .9s;
+}
+.cover.hide{opacity:0;visibility:hidden}
+.cover-inner{text-align:center;color:#F4F0E6;padding:24px;animation:fadeUp 1.2s ease both}
+.envelope{width:214px;height:144px;margin:0 auto 40px;position:relative;perspective:950px}
+.env-back{position:absolute;inset:0;border-radius:3px;background:#E7E2D3;box-shadow:0 26px 50px rgba(0,0,0,.42)}
+.env-front{
+  position:absolute;inset:0;z-index:3;border-radius:3px;
+  background:linear-gradient(158deg,#F7F3EA,#E9E4D5);
+  clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%);
+}
+.env-flap{
+  position:absolute;inset:0;z-index:5;transform-origin:top center;
+  background:linear-gradient(#F1ECDE,#E3DECE);
+  clip-path:polygon(0 0,50% 54%,100% 0);
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.24));
+  transition:transform .85s cubic-bezier(.45,.05,.25,1);
+}
+.env-seal{
+  position:absolute;z-index:6;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:36px;height:36px;border-radius:50%;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);transition:opacity .35s;
+}
+.env-seal svg{width:16px;height:16px;color:#F4F0E6;fill:#F4F0E6;stroke:#F4F0E6}
+.cover.opening .env-flap{transform:rotateX(-174deg);z-index:1;filter:none}
+.cover.opening .env-seal{opacity:0}
+.cover-names{font-family:var(--script);font-size:46px;line-height:1.25;letter-spacing:.5px}
+.cover-names em{font-style:normal;opacity:.75;font-size:34px}
+.cover-date{margin-top:8px;font-size:15px;letter-spacing:6px;opacity:.85}
+.btn-open{
+  margin-top:30px;padding:13px 34px;cursor:pointer;
+  background:transparent;color:#F4F0E6;
+  border:1px solid rgba(244,240,230,.65);border-radius:2px;
+  font-family:var(--serif);font-size:14px;letter-spacing:3.4px;text-transform:uppercase;
+  transition:.35s;
+}
+.btn-open:hover{background:#F4F0E6;color:var(--green-dark)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ---------- КАРТА ---------- */
+.card{
+  max-width:var(--card-w);margin:0 auto;background:var(--cream);
+  box-shadow:0 0 60px rgba(0,0,0,.45);overflow:hidden;
+}
+.sec{padding:52px 30px;text-align:center}
+.green{background:var(--green);color:var(--cream)}
+.cream{background:var(--cream);color:var(--ink)}
+.green .note,.green .label,.green .script{color:var(--cream)}
+
+/* ---------- HERO — КОНВЕРТ ---------- */
+.hero{
+  position:relative;background:var(--green);color:var(--cream);
+  min-height:534px;overflow:hidden;isolation:isolate;
+}
+/* кагаз текстурасы */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;opacity:.6;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0 1px,transparent 1px 4px);
+}
+/* конверттин чет-жакасындагы көлөкө */
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:4;pointer-events:none;
+  box-shadow:inset 0 0 90px rgba(0,0,0,.2);
+}
+/* жабылып турган үч бурчтуу капкак */
+.hero-flap{
+  position:absolute;top:0;left:0;right:0;height:63%;z-index:2;
+  background:linear-gradient(176deg,#7D8563 0%,#767E5B 48%,#6C7451 100%);
+  clip-path:polygon(0 0,50% 100%,100% 0);
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.3));
+}
+/* конверттин астыңкы бүктөмү */
+.hero-fold{
+  position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;
+  background:linear-gradient(to top,rgba(0,0,0,.09),transparent);
+  clip-path:polygon(0 100%,50% 0,100% 100%);
+}
+.hero-body{
+  position:relative;z-index:3;min-height:534px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:78px 28px 48px;text-align:center;
+}
+.hero-names h1{
+  font-family:var(--script);font-weight:400;font-size:60px;line-height:1.16;
+  text-shadow:0 2px 5px rgba(0,0,0,.18);
+}
+.amp{display:block;font-family:var(--script);font-size:34px;opacity:.85;margin:2px 0}
+.hero-date{font-size:17px;letter-spacing:5px;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+
+/* ---------- СҮРӨТ ---------- */
+.photo{position:relative;padding:8px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.14)}
+.photo img{filter:saturate(.96)}
+.mt{margin-top:40px}
+
+/* ---------- ТЕКСТТЕР ---------- */
+.script{font-family:var(--script);font-weight:400;font-size:40px;line-height:1.35;margin:14px 0 6px}
+.script.big{font-size:50px}
+.center{text-align:center}
+.quote{margin-top:26px;font-style:italic;font-size:15.5px;line-height:1.85;color:var(--ink-soft)}
+.label{font-size:13px;letter-spacing:4px;text-transform:uppercase;margin:26px 0 10px}
+.label.big{font-size:16px;letter-spacing:5px;margin-top:44px}
+.label.sub{opacity:.8;letter-spacing:3.4px;margin:0 0 16px}
+.note{font-size:15px;line-height:1.85;color:var(--ink-soft)}
+.note.light{color:rgba(244,240,230,.92)}
+.note.small{font-size:13.5px;letter-spacing:1.6px;margin-top:16px;opacity:.85}
+.invite-text{font-size:15.5px;line-height:2;letter-spacing:.4px}
+.sign{font-size:34px;margin-top:26px}
+
+/* ---------- ПЛЕЕР ---------- */
+.player{margin-top:34px}
+.player-label{font-size:14px;letter-spacing:2.6px;color:var(--ink-soft);margin-bottom:18px}
+.player-controls{display:flex;align-items:center;justify-content:center;gap:20px}
+.pc{width:20px;height:20px;color:var(--ink);opacity:.45}
+.play-btn{
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.play-btn:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.play-btn svg{width:22px;height:22px;fill:currentColor;stroke:currentColor}
+.play-btn .ic-pause{display:none;fill:none;stroke-width:1.8}
+.play-btn.playing .ic-play{display:none}
+.play-btn.playing .ic-pause{display:block}
+.progress{height:2px;background:var(--line);margin:20px auto 0;max-width:230px;border-radius:2px;cursor:pointer}
+.progress span{display:block;height:100%;width:0;background:var(--green);border-radius:2px}
+.track{margin-top:10px;font-size:12.5px;letter-spacing:2.2px;opacity:.55;text-transform:uppercase}
+
+/* ---------- ДАТА ---------- */
+.date-row{margin-top:36px}
+.month{font-size:14px;letter-spacing:5px;margin-bottom:10px}
+.date-line{display:flex;align-items:center;justify-content:center;gap:16px}
+.date-line span{font-size:13px;letter-spacing:3px;opacity:.9;flex:1}
+.date-line span:first-child{text-align:right;border-top:1px solid rgba(244,240,230,.45);padding-top:12px}
+.date-line span:last-child{text-align:left;border-top:1px solid rgba(244,240,230,.45);padding-top:12px}
+.date-line strong{font-size:44px;font-weight:400;line-height:1}
+
+/* ---------- САНОО ---------- */
+.countdown{display:flex;align-items:flex-start;justify-content:center;gap:6px}
+.countdown div{min-width:58px}
+.countdown b{display:block;font-size:34px;font-weight:400;letter-spacing:1px}
+.countdown i{display:block;font-style:normal;font-size:12px;letter-spacing:2px;opacity:.8;margin-top:4px}
+.countdown em{font-style:normal;font-size:30px;opacity:.6;line-height:1.15}
+
+/* ---------- КАЛЕНДАРЬ ---------- */
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px 2px;max-width:320px;margin:0 auto;font-size:13.5px}
+.calendar .dow{font-size:11px;letter-spacing:1.4px;opacity:.75;padding-bottom:8px}
+.calendar .day{padding:7px 0;position:relative}
+.calendar .day.off{opacity:.3}
+.calendar .day.today{font-weight:600}
+.calendar .day.today::before{
+  content:"";position:absolute;left:50%;top:50%;width:34px;height:34px;
+  transform:translate(-50%,-52%);
+  background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21C5.5 16.6 2.5 13 2.5 9.4A5.2 5.2 0 0 1 12 6.2a5.2 5.2 0 0 1 9.5 3.2C21.5 13 18.5 16.6 12 21z' fill='none' stroke='%23F4F0E6' stroke-width='1.1'/></svg>");
+}
+
+/* ---------- ИВЕНТТЕР ---------- */
+.ic{width:38px;height:38px;color:currentColor;margin:0 auto 4px;display:block;stroke-width:1.1}
+.ic.sm{width:30px;height:30px}
+.ic-mini{width:15px;height:15px;display:inline-block;vertical-align:-2px}
+.event{padding:8px 0}
+.event .time{font-size:22px;letter-spacing:1px;margin:6px 0 4px}
+.event .place{font-size:14.5px;letter-spacing:2.6px}
+.event .addr{font-size:14px;font-style:italic;color:var(--ink-soft);margin-top:3px}
+.btn-line{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+  padding:9px 22px;border:1px solid var(--line);border-radius:2px;
+  color:var(--ink);text-decoration:none;font-size:13px;letter-spacing:2.4px;text-transform:uppercase;
+  transition:.3s;
+}
+.btn-line:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.btn-fill{
+  display:inline-block;margin-top:18px;padding:12px 38px;
+  background:var(--green);color:var(--cream);text-decoration:none;
+  font-size:13px;letter-spacing:3.2px;text-transform:uppercase;border-radius:2px;transition:.3s;
+}
+.btn-fill:hover{background:var(--green-dark)}
+.divider{display:flex;align-items:center;gap:12px;margin:34px auto;max-width:230px;opacity:.6}
+.divider span{flex:1;height:1px;background:currentColor}
+
+/* ---------- ТАЙМЛАЙН ---------- */
+.timeline{position:relative;margin:26px auto 0;max-width:330px}
+.timeline::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1px;background:var(--line);transform:translateX(-.5px)}
+.tl-row{display:grid;grid-template-columns:1fr 18px 1fr;align-items:center;margin-bottom:20px}
+.tl-left{text-align:right;padding-right:14px}
+.tl-right{text-align:left;padding-left:14px}
+.tl-row b{display:block;font-size:15px;font-weight:600;letter-spacing:1px}
+.tl-row span{display:block;font-size:12.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.tl-dot{width:9px;height:9px;border-radius:50%;background:var(--green);margin:0 auto;position:relative;z-index:2;box-shadow:0 0 0 4px var(--cream)}
+
+/* ---------- QR ---------- */
+.qr{width:156px;height:156px;margin:24px auto 0;background:var(--cream);padding:10px;border-radius:3px}
+.qr img,.qr canvas{width:100%!important;height:100%!important;display:block}
+
+.last{padding-bottom:64px}
+
+/* ---------- АНИМАЦИЯ ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+@media(max-width:430px){
+  .sec{padding:46px 22px}
+  .hero,.hero-body{min-height:496px}
+  .hero-names h1{font-size:52px}
+  .countdown b{font-size:29px}
+  .countdown div{min-width:50px}
+  .calendar{font-size:12.5px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ================= SVG ИКОНКАЛАР ================= -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-rings" viewBox="0 0 24 24"><circle cx="8.4" cy="14.6" r="6.4"/><circle cx="15.6" cy="14.6" r="6.4"/><path d="M15.6 3.4 17.9 5.9 15.6 8.4 13.3 5.9z"/></symbol>
+  <symbol id="i-mosque" viewBox="0 0 24 24"><path d="M12 2v1.4"/><path d="M7.6 11.2c0-3.1 4.4-5.6 4.4-7.8 0 2.2 4.4 4.7 4.4 7.8"/><path d="M6.2 11.2h11.6v10.3H6.2z"/><path d="M10.3 21.5v-4a1.7 1.7 0 0 1 3.4 0v4"/><path d="M2.6 21.5V9.9c0-1.1 1.6-1.1 1.6 0v11.6"/><path d="M19.8 21.5V9.9c0-1.1 1.6-1.1 1.6 0v11.6"/></symbol>
+  <symbol id="i-glasses" viewBox="0 0 24 24"><path d="M3.5 2.5h6l-1.1 6a1.9 1.9 0 0 1-3.8 0z"/><path d="M6.5 10.5v9M4.5 21.5h4"/><path d="M14.5 2.5h6l-1.1 6a1.9 1.9 0 0 1-3.8 0z"/><path d="M17.5 10.5v9M15.5 21.5h4"/></symbol>
+  <symbol id="i-dance" viewBox="0 0 24 24"><circle cx="7.5" cy="4" r="2"/><circle cx="16.5" cy="4" r="2"/><path d="M7.5 6.2v6.3L5.4 21M7.5 12.5 9.6 21M16.5 6.2v6.3L14.4 21M16.5 12.5 18.6 21M9.3 8.5h5.4"/></symbol>
+  <symbol id="i-dinner" viewBox="0 0 24 24"><path d="M6 2.5v7a2 2 0 0 0 2 2v10M4 2.5v5M8 2.5v5"/><path d="M18 2.5c-1.6 1.8-1.9 5.8-.6 8H19V2.5z"/><path d="M18 10.5v11"/></symbol>
+  <symbol id="i-party" viewBox="0 0 24 24"><path d="M12 1.5v3.2"/><circle cx="12" cy="13" r="8"/><path d="M4 13h16M12 5v16"/><path d="M8.2 6.2a13 13 0 0 0 0 13.6M15.8 6.2a13 13 0 0 1 0 13.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5V12l3.5 2.2"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><path d="M3 9.5h18v3H3zM4.5 12.5h15V21h-15z"/><path d="M12 9.5V21"/><path d="M12 9.5S10.8 4 8.2 4a2.2 2.2 0 0 0 0 5.5M12 9.5S13.2 4 15.8 4a2.2 2.2 0 0 1 0 5.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="M12 19c-2.6-1.8-3.6-3-3.6-4.3a1.8 1.8 0 0 1 3.6-.7 1.8 1.8 0 0 1 3.6.7c0 1.3-1 2.5-3.6 4.3z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5c-6-4-9-7.3-9-10.7A5 5 0 0 1 12 6.4a5 5 0 0 1 9 3.4c0 3.4-3 6.7-9 10.7z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.3 7-11.5A7 7 0 0 0 5 10.5C5 15.7 12 22 12 22z"/><circle cx="12" cy="10.3" r="2.6"/></symbol>
+</svg>
+
+<!-- ================= КОНВЕРТ (ачылыш экраны) ================= -->
+<div class="cover" id="cover">
+  <div class="cover-inner">
+    <div class="envelope">
+      <div class="env-back"></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></div>
+    </div>
+    <p class="cover-names">Мирбек <em>&amp;</em> Мээрим</p>
+    <p class="cover-date">14 · 11 · 2026</p>
+    <button class="btn-open" id="openBtn">Чакырууну ачуу</button>
+  </div>
+</div>
+
+<!-- ================= ЧАКЫРУУ КАРТАСЫ ================= -->
+<main class="card" id="card">
+
+  <!-- 1. БАШКЫ БӨЛҮК -->
+  <section class="hero">
+    <div class="hero-flap"></div>
+    <div class="hero-fold"></div>
+    <div class="hero-body">
+      <div class="hero-names">
+        <h1 class="script">Мирбек</h1>
+        <span class="amp">&amp;</span>
+        <h1 class="script">Мээрим</h1>
+      </div>
+      <p class="hero-date">14.11.2026</p>
+    </div>
+  </section>
+
+  <!-- 2. СҮРӨТ + ЦИТАТА + МУЗЫКА -->
+  <section class="sec cream">
+    <div class="photo reveal"><img src="photo1.jpg" alt="Мирбек жана Мээрим"></div>
+    <p class="quote reveal">«Сени менен өткөн ар бир күн — өмүрүмдүн эң жарык бети.<br>Бул жолду экөөбүз бирге, колдон жетелешип басабыз.»</p>
+
+    <div class="player reveal">
+      <p class="player-label">Биздин ырды угуп коюңуз</p>
+      <div class="player-controls">
+        <svg class="pc ghost" viewBox="0 0 24 24"><path d="M3 5h4l10 14h4M16 5h5v5M3 19h4"/></svg>
+        <svg class="pc ghost" viewBox="0 0 24 24"><path d="M18 5 8 12l10 7zM6 5v14"/></svg>
+        <button class="play-btn" id="playBtn" aria-label="Ырды коюу">
+          <svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24"><path d="M9 5.5v13M15 5.5v13"/></svg>
+        </button>
+        <svg class="pc ghost" viewBox="0 0 24 24"><path d="M6 5l10 7L6 19zM18 5v14"/></svg>
+        <svg class="pc ghost" viewBox="0 0 24 24"><path d="M3 8h14l-3-3M21 16H7l3 3"/></svg>
+      </div>
+      <div class="progress" id="progress"><span id="bar"></span></div>
+      <p class="track">Yiruma — River Flows in You</p>
+    </div>
+  </section>
+
+  <!-- 3. ЧАКЫРУУ + САНОО + КАЛЕНДАРЬ -->
+  <section class="sec green">
+    <p class="invite-text reveal">Ата-энебиздин ак батасы менен,<br>өмүрлүк жарыбыз болуп бириккен күнүбүздү<br>сиз менен бирге тосууну каалайбыз</p>
+
+    <div class="date-row reveal">
+      <p class="month">НОЯБРЬ</p>
+      <div class="date-line">
+        <span>ИШЕМБИ</span>
+        <strong>14</strong>
+        <span>2026</span>
+      </div>
+    </div>
+
+    <p class="label reveal">ТОЙГО ЧЕЙИН КАЛДЫ</p>
+    <div class="countdown reveal" id="countdown">
+      <div><b id="cd-d">00</b><i>Күн</i></div><em>:</em>
+      <div><b id="cd-h">00</b><i>Саат</i></div><em>:</em>
+      <div><b id="cd-m">00</b><i>Мүн</i></div><em>:</em>
+      <div><b id="cd-s">00</b><i>Сек</i></div>
+    </div>
+
+    <p class="label big reveal">УЛУУ КҮН</p>
+    <p class="label sub reveal">НОЯБРЬ 2026</p>
+    <div class="calendar reveal" id="calendar"></div>
+  </section>
+
+  <!-- 4. НИКЕ + ТОЙ -->
+  <section class="sec cream">
+    <div class="event reveal">
+      <!-- мечит белгиси керек болсо #i-rings ордуна #i-mosque жазыңыз -->
+      <svg class="ic"><use href="#i-rings"/></svg>
+      <h2 class="script">Нике кыюу</h2>
+      <p class="time">14:00</p>
+      <p class="place">«АК-БУУРА» МЕЧИТИ</p>
+      <p class="addr">Ош шаары, Масалиев проспекти 21</p>
+      <!-- 👇 Картадагы шилтемени өзүңүздүкүнө алмаштырыңыз -->
+      <a class="btn-line" href="https://maps.google.com/?q=Osh,+Kyrgyzstan" target="_blank" rel="noopener">
+        <svg class="ic-mini"><use href="#i-pin"/></svg> Жайгашкан жери
+      </a>
+    </div>
+
+    <div class="divider reveal"><span></span><svg class="ic-mini"><use href="#i-heart"/></svg><span></span></div>
+
+    <div class="event reveal">
+      <svg class="ic"><use href="#i-glasses"/></svg>
+      <h2 class="script">Той салтанаты</h2>
+      <p class="time">18:00</p>
+      <p class="place">«SULTAN PALACE» ТОЙ КАНАСЫ</p>
+      <p class="addr">Ош шаары, Курманжан Датка көчөсү 148</p>
+      <!-- 👇 Картадагы шилтемени өзүңүздүкүнө алмаштырыңыз -->
+      <a class="btn-line" href="https://maps.google.com/?q=Osh,+Kyrgyzstan" target="_blank" rel="noopener">
+        <svg class="ic-mini"><use href="#i-pin"/></svg> Жайгашкан жери
+      </a>
+    </div>
+
+    <h2 class="script center mt reveal">Тойдун тартиби</h2>
+
+    <div class="timeline">
+      <div class="tl-row reveal">
+        <div class="tl-left"><svg class="ic sm"><use href="#i-rings"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><b>14:00</b><span>Нике кыюу</span></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><b>17:30</b><span>Коноктордун<br>тосулушу</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><svg class="ic sm"><use href="#i-glasses"/></svg></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><svg class="ic sm"><use href="#i-dance"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><b>18:30</b><span>Ак бата,<br>биринчи бий</span></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><b>19:30</b><span>Кечки тамак</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><svg class="ic sm"><use href="#i-dinner"/></svg></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><svg class="ic sm"><use href="#i-party"/></svg></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><b>21:00</b><span>Оюн-зоок, бий</span></div>
+      </div>
+      <div class="tl-row reveal">
+        <div class="tl-left"><b>00:00</b><span>Аягы</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right"><svg class="ic sm"><use href="#i-clock"/></svg></div>
+      </div>
+    </div>
+
+    <div class="photo reveal mt"><img src="photo2.jpg" alt="Той сүрөтү"></div>
+
+  </section>
+
+  <!-- 5. БЕЛЕК -->
+  <section class="sec green">
+    <svg class="ic reveal"><use href="#i-gift"/></svg>
+    <h2 class="script reveal">Белек жөнүндө</h2>
+    <p class="note light reveal">Эң кымбат белек — бул сиздин катышууңуз.<br>Эгерде белек кылууну кааласаңыз,<br>төмөнкү QR аркылуу өткөрсөңүз болот.</p>
+    <div class="qr reveal" id="qrcode"><img src="qr.png" alt="QR код"></div>
+    <p class="note light small reveal">MBANK · 0700 123 456 · Мирбек А.</p>
+  </section>
+
+  <!-- 6. ЫРАСТОО -->
+  <section class="sec cream">
+    <svg class="ic reveal"><use href="#i-cal"/></svg>
+    <h2 class="script reveal">Катышууну ырастоо</h2>
+    <p class="note reveal">Сурообуз: 01-ноябрга чейин<br>катышууңузду ырастап коюңуз</p>
+    <!-- 👇 WhatsApp номерин js/script.js файлынан алмаштырыңыз -->
+    <a class="btn-fill" id="rsvpBtn" href="#" target="_blank" rel="noopener">Ырастоо</a>
+
+    <div class="divider reveal"><span></span><svg class="ic-mini"><use href="#i-heart"/></svg><span></span></div>
+
+    <p class="label reveal">СУНУШТАР</p>
+    <p class="note reveal">Той кызматкерлеринин көрсөтмөлөрүн аткаруу.<br>Убакытты так сактоо.</p>
+
+    <p class="label mt reveal">БАЛДАРСЫЗ</p>
+    <p class="note reveal">Бул кече чоңдор үчүн уюштурулат.<br>Түнү бою көңүл ачууга даярданыңыз,<br>балдарды бул жолу үйдө калтыралы.</p>
+  </section>
+
+  <!-- 7. АЯКТОО -->
+  <section class="sec green last">
+    <p class="label reveal">СИЗДИ КӨРҮҮГӨ КУБАНЫЧТА БОЛОБУЗ</p>
+    <h2 class="script big reveal">Чоң рахмат!</h2>
+    <div class="photo reveal"><img src="photo3.jpg" alt="Мирбек жана Мээрим"></div>
+    <p class="sign script reveal">Мирбек &amp; Мээрим</p>
+  </section>
+</main>
+
+<audio id="audio" src="song.mp3" loop preload="auto"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ============================================================
+   БААРЫН УШУЛ ЖЕРДЕН ӨЗГӨРТӨСҮҢӨР 👇
+   ============================================================ */
+const CONFIG = {
+  // Той башталчу убакыт (жыл, ай-1, күн, саат, мүнөт)
+  // ЭСКЕРТҮҮ: ай 0дон башталат → 10 = НОЯБРЬ
+  weddingDate: new Date(2026, 10, 14, 14, 0, 0),
+
+  // Календарда көрсөтүлчү ай
+  calendarYear: 2026,
+  calendarMonth: 10,   // 10 = ноябрь
+  calendarDay: 14,     // жүрөкчө коюлчу күн
+
+  // WhatsApp аркылуу ырастоо
+  whatsappPhone: "996700123456",            // өз номериңер (+ жана боштук жок)
+  whatsappText: "Салам! Мирбек менен Мээримдин тоюна катышам. Аты-жөнүм: ",
+
+  // QR-коддун ичиндеги маалымат (шилтеме, карта номери ж.б.)
+  qrData: "MBANK 0700123456 Mirbek A."
+};
+
+/* ============================================================
+   Төмөн жагын өзгөртпөсөңөр деле болот
+   ============================================================ */
+
+/* ---------- Конвертти ачуу ---------- */
+const cover  = document.getElementById('cover');
+const audio  = document.getElementById('audio');
+const playBtn= document.getElementById('playBtn');
+
+document.body.classList.add('locked');
+
+document.getElementById('openBtn').addEventListener('click', () => {
+  cover.classList.add('opening');                 // капкак ачылат
+  audio.volume = 0.6;
+  audio.play().then(() => playBtn.classList.add('playing')).catch(()=>{});
+  setTimeout(() => {
+    cover.classList.add('hide');
+    document.body.classList.remove('locked');
+  }, 700);
+  setTimeout(() => cover.remove(), 1700);
+});
+
+/* ---------- Музыка ---------- */
+playBtn.addEventListener('click', () => {
+  if (audio.paused) { audio.play(); playBtn.classList.add('playing'); }
+  else { audio.pause(); playBtn.classList.remove('playing'); }
+});
+
+const bar = document.getElementById('bar');
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) bar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+});
+document.getElementById('progress').addEventListener('click', e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  if (audio.duration) audio.currentTime = (e.clientX - r.left) / r.width * audio.duration;
+});
+
+/* ---------- Тойго чейинки саноо ---------- */
+const pad = n => String(n).padStart(2, '0');
+function tick() {
+  const diff = CONFIG.weddingDate - new Date();
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<div style="min-width:auto"><b style="font-size:26px">Бүгүн улуу күн!</b></div>';
+    return;
+  }
+  const s = Math.floor(diff / 1000);
+  document.getElementById('cd-d').textContent = pad(Math.floor(s / 86400));
+  document.getElementById('cd-h').textContent = pad(Math.floor(s % 86400 / 3600));
+  document.getElementById('cd-m').textContent = pad(Math.floor(s % 3600 / 60));
+  document.getElementById('cd-s').textContent = pad(s % 60);
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- Календарь ---------- */
+(function buildCalendar() {
+  const dows = ['ДҮЙ','ШЕЙ','ШАР','БЕЙ','ЖУМ','ИШЕ','ЖЕК'];
+  const el = document.getElementById('calendar');
+  const y = CONFIG.calendarYear, m = CONFIG.calendarMonth;
+  let html = dows.map(d => `<div class="dow">${d}</div>`).join('');
+
+  const first = new Date(y, m, 1);
+  const shift = (first.getDay() + 6) % 7;             // дүйшөмбүдөн башталат
+  const days  = new Date(y, m + 1, 0).getDate();
+  const prev  = new Date(y, m, 0).getDate();
+
+  for (let i = shift; i > 0; i--) html += `<div class="day off">${prev - i + 1}</div>`;
+  for (let d = 1; d <= days; d++)
+    html += `<div class="day${d === CONFIG.calendarDay ? ' today' : ''}">${d}</div>`;
+  const tail = (7 - (shift + days) % 7) % 7;
+  for (let i = 1; i <= tail; i++) html += `<div class="day off">${i}</div>`;
+
+  el.innerHTML = html;
+})();
+
+/* ---------- Ырастоо баскычы ---------- */
+document.getElementById('rsvpBtn').href =
+  `https://wa.me/${CONFIG.whatsappPhone}?text=${encodeURIComponent(CONFIG.whatsappText)}`;
+
+/* ---------- QR-код ----------
+   Эгер интернеттен китепкана жүктөлсө — CONFIG.qrData'дан кайра түзүлөт,
+   жүктөлбөсө qr.png дайыма көрүнүп турат. */
+window.addEventListener('load', () => {
+  const box = document.getElementById('qrcode');
+  if (box && window.QRCode) {
+    box.innerHTML = '';
+    new QRCode(box, {
+      text: CONFIG.qrData,
+      width: 300, height: 300,
+      colorDark: '#6E7553', colorLight: '#F4F0E6',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+});
+
+/* ---------- Скроллдогу анимация ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+</script>
+</body>
+</html>
